@@ -32,4 +32,5 @@ docker compose up
 
 ## More
 
-Add notification on the Connect section of [Radarr](http://localhost:8032/settings/connect) and [Sonarr](http://localhost:8033/settings/connect)
+- Add notification on the Connect section of [Radarr](http://localhost:8032/settings/connect) and [Sonarr](http://localhost:8033/settings/connect)
+- Use [lists](http://localhost:8032/settings/importlists) to automatically download movie when they are out.
