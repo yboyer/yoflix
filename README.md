@@ -1,15 +1,17 @@
 # TorrentManager
 
-1. Edit the `.env` file
-2. Start
+- [Jackett](http://localhost:8031)
+- [Radarr](http://localhost:8032)
+- [Sonarr](http://localhost:8033)
+
+## Setup
+
+1. Fill the `.env` file with an [AllDebrid API Key](https://alldebrid.fr/apikeys/)
+2. Start containers
 
 ```sh
 docker compose up
 ```
-
-- [Jackett](http://localhost:8031)
-- [Radarr](http://localhost:8032)
-- [Sonarr](http://localhost:8033)
 
 ## Config
 
