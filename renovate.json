@@ -1,0 +1,24 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "rangeStrategy": "bump",
+  "ignoreTests": true,
+  "packageRules": [
+    {
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "automerge": true
+    },
+    {
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "automerge": true
+    }
+  ]
+}

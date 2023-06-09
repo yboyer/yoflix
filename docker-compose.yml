@@ -1,0 +1,70 @@
+version: '3'
+services:
+  jackett:
+    image: linuxserver/jackett:arm64v8-latest
+    container_name: jackett
+    restart: unless-stopped
+    ports:
+      - 8031:9117
+    volumes:
+      - ./services/Jackett/config:/config
+    environment:
+      - PUID=911
+      - PGID=1000
+      - TZ=Europe/Paris
+      - JACKETT_KEY=5641
+    links:
+      - flaresolverr
+
+  radarr:
+    image: linuxserver/radarr:arm64v8-latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - ./services/Radarr/config:/config
+      - ./data:/data
+    ports:
+      - 8032:7878
+    restart: unless-stopped
+    links:
+      - jackett
+      - uploader
+
+  sonarr:
+    image: linuxserver/sonarr:arm64v8-latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - ./services/Sonarr/config:/config
+      - ./data:/data
+    ports:
+      - 8033:8989
+    restart: unless-stopped
+    links:
+      - jackett
+      - uploader
+
+  flaresolverr:
+    image: flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_HTML=${LOG_HTML:-false}
+      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
+      - TZ=Europe/London
+    restart: unless-stopped
+
+  uploader:
+    container_name: torrent_uploader
+    build: .
+    environment:
+      - ALLDEBRID_API_KEY=${ALLDEBRID_API_KEY}
+    restart: unless-stopped
+    volumes:
+      - ./data:/data
