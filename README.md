@@ -1,4 +1,4 @@
-# TorrentManager
+# Yoflix
 
 - [Jackett](http://localhost:8031)
 - [Radarr](http://localhost:8032)
