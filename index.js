@@ -73,7 +73,8 @@ watch(config.torrentDir, { recursive: true }, async function (evt, file) {
 
     // Create file for radarr
     const index = done.findIndex(
-      (d) => d.name === name || natural.JaroWinklerDistance(d.name, name) > 0.95
+      (d) =>
+        d.name === name || natural.JaroWinklerDistance(d.name, name, {}) > 0.95
     )
     if (index > -1) {
       const el = done.splice(index, 1)[0]
