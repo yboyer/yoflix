@@ -70,6 +70,9 @@ watch(config.torrentDir, { recursive: true }, async function (evt, file) {
       )
       .json()
     console.log('Alldebrid:', res.status)
+    if (res.status !== 'success') {
+      console.log('Files:', res.data?.files)
+    }
 
     // Create file for radarr
     const index = done.findIndex(
