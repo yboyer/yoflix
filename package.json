@@ -10,7 +10,7 @@
     "got": "^11.8.6",
     "natural": "^6.12.0",
     "node-watch": "^0.7.4",
-    "parse-torrent": "^9.1.5"
+    "parse-torrent": "^11.0.19"
   },
   "scripts": {
     "start": "node index"
