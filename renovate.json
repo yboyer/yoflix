@@ -1,18 +1,6 @@
 {
   "extends": [
-    "config:base"
-  ],
-  "rangeStrategy": "bump",
-  "ignoreTests": true,
-  "packageRules": [
-    {
-      "matchUpdateTypes": [
-        "minor",
-        "patch",
-        "pin",
-        "digest"
-      ],
-      "automerge": true
-    }
+    "github>yboyer/renovate-config"
   ]
 }
+
