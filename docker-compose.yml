@@ -17,7 +17,7 @@ services:
       - flaresolverr
 
   radarr:
-    image: linuxserver/radarr:arm64v8-latest@sha256:dc92ae2b394ff7aa3631c5d31d93e31a0b2f1544031a1053003e2b1e7ab14884
+    image: linuxserver/radarr:arm64v8-latest@sha256:cde518a845cd3f56809f4a5ae0c62867b3cc5952cc223166860e4c12b12c927f
     container_name: radarr
     environment:
       - PUID=1000
