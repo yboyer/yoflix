@@ -1,7 +1,7 @@
 version: '3'
 services:
   jackett:
-    image: linuxserver/jackett:arm64v8-latest@sha256:7f3582bf477bb1ba68c03dcfbc40ecde40fc2794bfa925b6bea598aa5e4b86b2
+    image: linuxserver/jackett:arm64v8-latest@sha256:40c774edc9da470ba6ecfbae4131266f83c7b27a577eabaac6a21bfcde659b92
     container_name: jackett
     restart: unless-stopped
     ports:
