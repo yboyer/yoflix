@@ -1,0 +1,10 @@
+{
+  "extends": "@yboyer/config/tsconfig.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "rootDir": "./services",
+    "outDir": "./dist"
+  },
+  "include": ["./services"]
+}

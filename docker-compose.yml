@@ -1,30 +1,29 @@
-version: '3'
 services:
   jackett:
-    image: linuxserver/jackett:arm64v8-latest@sha256:7f3582bf477bb1ba68c03dcfbc40ecde40fc2794bfa925b6bea598aa5e4b86b2
+    image: linuxserver/jackett:0.24.2125
     container_name: jackett
     restart: unless-stopped
     ports:
       - 8031:9117
     volumes:
-      - ./services/Jackett/config:/config
+      - jackett_config:/config
     environment:
       - PUID=911
       - PGID=1000
       - TZ=Europe/Paris
-      - JACKETT_KEY=5641
-    links:
-      - flaresolverr
+      - JACKETT_KEY=${JACKETT_API_KEY:-}
+    # links:
+    #   - flaresolverr
 
   radarr:
-    image: linuxserver/radarr:arm64v8-latest@sha256:dc92ae2b394ff7aa3631c5d31d93e31a0b2f1544031a1053003e2b1e7ab14884
+    image: linuxserver/radarr:6.2.1
     container_name: radarr
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Paris
     volumes:
-      - ./services/Radarr/config:/config
+      - radarr_config:/config
       - ./data:/data
     ports:
       - 8032:7878
@@ -34,14 +33,14 @@ services:
       - uploader
 
   sonarr:
-    image: linuxserver/sonarr:arm64v8-latest@sha256:630090bc7280214bb8bec96876238053b081ae30007b18e5980c549a94ed888c
+    image: linuxserver/sonarr:4.0.19
     container_name: sonarr
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Paris
     volumes:
-      - ./services/Sonarr/config:/config
+      - sonarr_config:/config
       - ./data:/data
     ports:
       - 8033:8989
@@ -50,21 +49,55 @@ services:
       - jackett
       - uploader
 
-  flaresolverr:
-    image: flaresolverr/flaresolverr:latest@sha256:139dfee1c6f89249c8d665d1333a42e8ec74ec0a86bc6bb1c8461e10d3a66a47
-    container_name: flaresolverr
-    environment:
-      - LOG_LEVEL=${LOG_LEVEL:-info}
-      - LOG_HTML=${LOG_HTML:-false}
-      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
-      - TZ=Europe/London
-    restart: unless-stopped
+  # flaresolverr:
+  #   image: flaresolverr/flaresolverr:v3.5.0
+  #   container_name: flaresolverr
+  #   environment:
+  #     - LOG_LEVEL=${LOG_LEVEL:-info}
+  #     - LOG_HTML=${LOG_HTML:-false}
+  #     - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
+  #     - TZ=Europe/London
+  #   restart: unless-stopped
 
   uploader:
     container_name: torrent_uploader
     build: .
+    command: npm run uploader
     environment:
       - ALLDEBRID_API_KEY=${ALLDEBRID_API_KEY}
     restart: unless-stopped
     volumes:
       - ./data:/data
+
+  bootstrap:
+    profiles:
+      - bootstrap
+    container_name: torrent_bootstrap
+    build: .
+    command: npm run bootstrap
+    environment:
+      - JACKETT_API_KEY=${JACKETT_API_KEY:-}
+      - JACKETT_BASE_URL=http://jackett:9117
+      - RADARR_BASE_URL=http://radarr:7878
+      - RADARR_INDEXER_MIN_SEEDERS=${RADARR_INDEXER_MIN_SEEDERS:-5}
+      - SONARR_BASE_URL=http://sonarr:8989
+      - SONARR_INDEXER_MIN_SEEDERS=${SONARR_INDEXER_MIN_SEEDERS:-1}
+      - ROOT_FOLDER=/data/files
+      - TORRENT_FOLDER=/data/torrents/
+      - WATCH_FOLDER=/data/completed/
+      - WEBHOOK_URL=http://uploader:3000
+    restart: 'no'
+    depends_on:
+      - jackett
+      - radarr
+      - sonarr
+    volumes:
+      - jackett_config:/config/jackett
+      - radarr_config:/config/radarr:ro
+      - sonarr_config:/config/sonarr:ro
+      - ./data:/data
+
+volumes:
+  jackett_config:
+  radarr_config:
+  sonarr_config:
