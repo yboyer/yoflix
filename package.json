@@ -6,7 +6,7 @@
   "dependencies": {
     "chokidar": "^5.0.0",
     "envalid": "^8.2.0",
-    "fastify": "^5.8.5",
+    "fastify": "^5.9.0",
     "natural": "8.1.1",
     "parse-torrent": "^11.0.21"
   },
