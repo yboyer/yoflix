@@ -48,41 +48,54 @@ async function createFile({ dir, filename }: { dir: string; filename: string }) 
   } catch {}
 }
 
+async function sendToAlldebrid(file: string) {
+  const form = new FormData()
+  form.append('files[]', await fs.openAsBlob(file), path.basename(file))
+
+  const searchParams = new URLSearchParams({
+    agent: 'TorrentLoader',
+    apikey: config.ALLDEBRID_API_KEY,
+  })
+
+  const request = await fetch(
+    `https://api.alldebrid.com/v4/magnet/upload/file?${searchParams.toString()}`,
+    {
+      method: 'POST',
+      body: form,
+    }
+  )
+  const res = (await request.json()) as {
+    status: 'success' | 'error'
+    data?: {
+      files?: {
+        path: string
+        name: string
+        error?: {
+          code: string
+          message: string
+        }
+      }[]
+    }
+  }
+  if (!res || res.status !== 'success' || res.data?.files?.[0]?.error) {
+    console.log('Alldebrid response:', JSON.stringify(res, null, 2))
+    throw new Error('Failed to send torrent to Alldebrid')
+  }
+}
+
 chokidar
   .watch(config.torrentDir, { persistent: true, ignoreInitial: true })
   .on('all', async (evt, file) => {
-    if (evt !== 'add' || !file.endsWith('.torrent')) return
+    console.log('Event:', evt, 'File:', file)
+    if ((evt !== 'add' && evt !== 'change') || !file.endsWith('.torrent')) return
 
     const { name } = path.parse(file)
-    console.log(`${name} modified [${evt}]`)
+    console.log(`${name} [${evt}]`)
 
-    const form = new FormData()
-    form.append('files[]', await fs.openAsBlob(file))
-
-    const searchParams = new URLSearchParams({
-      agent: 'TorrentLoader',
-      apikey: config.ALLDEBRID_API_KEY,
-    })
     try {
       const parsedTorrent = await parser(fs.readFileSync(file))
 
-      const request = await fetch(
-        `https://api.alldebrid.com/v4/magnet/upload/file?${searchParams.toString()}`,
-        {
-          method: 'POST',
-          body: form,
-        }
-      )
-      const res = (await request.json()) as {
-        status: 'success' | 'error'
-        data?: {
-          files?: { path: string; name: string }[]
-        }
-      }
-      console.log('Alldebrid response:', res.status)
-      if (res.status !== 'success') {
-        console.log('Files:', res.data?.files)
-      }
+      await sendToAlldebrid(file)
 
       // Create file for radarr
       const index = done.findIndex(
@@ -123,12 +136,12 @@ chokidar
 api.post<{
   Body: {
     eventType: string
-    movie?: { folderPath: string }
+    movie?: { folderPath: string; title: string }
     series?: { path: string }
     release: { releaseTitle: string }
   }
 }>('/', async ({ body, log }) => {
-  log.info(body)
+  log.info(body.release.releaseTitle)
   if (config.events.includes(body.eventType)) {
     if (body.movie) {
       done.push({
