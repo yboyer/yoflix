@@ -77,7 +77,7 @@ async function sendToAlldebrid(file: string) {
       }[]
     }
   }
-  if (!res || res.status !== 'success' || res.data?.files?.[0]?.error) {
+  if (res?.status !== 'success' || res.data?.files?.[0]?.error) {
     console.log('Alldebrid response:', JSON.stringify(res, null, 2))
     throw new Error('Failed to send torrent to Alldebrid')
   }
