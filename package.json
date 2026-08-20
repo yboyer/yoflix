@@ -4,11 +4,11 @@
   "type": "module",
   "license": "MIT",
   "dependencies": {
-    "chokidar": "^5.0.0",
-    "envalid": "^8.2.0",
-    "fastify": "^5.12.0",
+    "chokidar": "5.0.0",
+    "envalid": "8.2.0",
+    "fastify": "5.12.0",
     "natural": "8.1.1",
-    "parse-torrent": "^11.0.24"
+    "parse-torrent": "11.0.24"
   },
   "scripts": {
     "bootstrap": "node services/bootstrap/index.ts",
@@ -17,8 +17,8 @@
     "uploader": "node services/uploader/index.ts"
   },
   "devDependencies": {
-    "@types/node": "^26.2.0",
-    "@yboyer/config": "^1.4.4",
-    "typescript": "^7.0.2"
+    "@types/node": "26.2.0",
+    "@yboyer/config": "1.4.4",
+    "typescript": "7.0.2"
   }
 }
