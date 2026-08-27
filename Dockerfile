@@ -5,3 +5,5 @@ ENV NODE_ENV=production
 COPY package*.json ./
 RUN npm ci
 COPY services ./services
+
+USER node
