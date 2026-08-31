@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@types/node": "26.3.0",
-    "@yboyer/config": "1.4.4",
+    "@yboyer/config": "1.4.5",
     "typescript": "7.0.2"
   }
 }
