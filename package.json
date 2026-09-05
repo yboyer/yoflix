@@ -17,7 +17,7 @@
     "uploader": "node services/uploader/index.ts"
   },
   "devDependencies": {
-    "@types/node": "26.4.0",
+    "@types/node": "26.4.1",
     "@yboyer/config": "1.4.5",
     "typescript": "7.0.2"
   }
