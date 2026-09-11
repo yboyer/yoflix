@@ -1,0 +1,5 @@
+[allowlist]
+description = "Allow known legacy Jackett API key finding"
+commits = [
+  "d162b94c9a1862e59c6e091f94df6c229cb45cd2",
+]
