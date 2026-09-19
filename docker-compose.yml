@@ -1,6 +1,6 @@
 services:
   jackett:
-    image: linuxserver/jackett:0.24.2595@sha256:2f3b9bb6040e637fd0cac6c720a9cc03ba0cad8b9a8fc11e4b4bc7edd1424e21
+    image: linuxserver/jackett:0.24.2601@sha256:9f9946008fa7c3ad471bbdcdc24c282e5093d51e2bdbadd3f4b3405025883bc1
     container_name: jackett
     restart: unless-stopped
     ports:
