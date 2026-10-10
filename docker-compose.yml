@@ -16,7 +16,7 @@ services:
     #   - flaresolverr
 
   radarr:
-    image: linuxserver/radarr:6.4.4@sha256:c960f2b52ec6542dbe6707c5a21e696a7c74fd8b17997454f4d10a55dacee133
+    image: linuxserver/radarr:6.4.4@sha256:7dfd049e79c00b16fbc29c3f5d96a9e7b9e73a23930b4c5b3c4541d60b366814
     container_name: radarr
     environment:
       - PUID=1000
