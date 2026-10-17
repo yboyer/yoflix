@@ -24,7 +24,7 @@ Self-hosted media automation stack built around Jackett, Radarr, Sonarr, FlareSo
 ├── services/
 │   ├── bootstrap/   # Radarr/Sonarr provisioning + config sync
 │   └── uploader/    # webhook receiver + torrent watcher
-└── docker-compose.yml
+└── compose.yaml
 ```
 
 ## Requirements
@@ -37,7 +37,7 @@ Optional:
 
 - `JACKETT_API_KEY` if you want a fixed Jackett API key on first boot
 
-The current setup expects only the API keys in `.env`. Paths, URLs, webhook target, and category defaults come from `docker-compose.yml` and the bootstrap service.
+The current setup expects only the API keys in `.env`. Paths, URLs, webhook target, and category defaults come from `compose.yaml` and the bootstrap service.
 
 ## Setup
 
