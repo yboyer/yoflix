@@ -4,7 +4,7 @@
   "type": "module",
   "license": "MIT",
   "dependencies": {
-    "chokidar": "5.0.0",
+    "chokidar": "6.0.0",
     "envalid": "8.2.0",
     "fastify": "5.12.7",
     "natural": "8.1.1",
