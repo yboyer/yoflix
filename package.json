@@ -7,7 +7,7 @@
     "chokidar": "6.0.0",
     "envalid": "9.0.0",
     "fastify": "5.12.7",
-    "natural": "8.2.3",
+    "natural": "8.2.6",
     "parse-torrent": "11.0.24"
   },
   "scripts": {
