@@ -33,7 +33,7 @@ services:
       - uploader
 
   sonarr:
-    image: linuxserver/sonarr:4.0.20@sha256:44b06045a98bc1f237b9ffefc4b28dab64cb29305e4a2a94875ae93b5224e4cc
+    image: linuxserver/sonarr:4.0.20@sha256:48e36b608b461273b9dae857725cd0561a127f2c694b687318f6d0c5ce63e5c9
     container_name: sonarr
     environment:
       - PUID=1000
