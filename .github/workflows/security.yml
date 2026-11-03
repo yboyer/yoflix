@@ -3,9 +3,9 @@ name: Security Scan
 on:
   workflow_dispatch:
   pull_request:
-    branches: [master, main]
+    branches: [ master, main ]
   schedule:
-    - cron: "0 6 * * *"
+    - cron: '0 6 * * *'
 
 permissions:
   contents: read
