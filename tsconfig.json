@@ -1,10 +1,9 @@
 {
-  "extends": "@tsconfig/node24/tsconfig.json",
+  "extends": "@tsconfig/node26/tsconfig.json",
   "compilerOptions": {
     "allowImportingTsExtensions": true,
-    "rewriteRelativeImportExtensions": true,
-    "rootDir": "./services",
-    "outDir": "./dist"
+    "strict": true,
+    "noEmit": true
   },
   "include": ["./services"]
 }
