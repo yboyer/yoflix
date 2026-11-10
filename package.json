@@ -17,7 +17,7 @@
     "uploader": "node services/uploader/index.ts"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.6.5",
+    "@biomejs/biome": "2.6.6",
     "@tsconfig/node26": "26.0.1",
     "@types/node": "26.6.6",
     "@yboyer/config": "2.2.0",
