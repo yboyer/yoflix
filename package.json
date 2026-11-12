@@ -20,7 +20,7 @@
     "@biomejs/biome": "2.6.6",
     "@tsconfig/node26": "26.0.1",
     "@types/node": "26.6.6",
-    "@yboyer/config": "2.3.1",
+    "@yboyer/config": "2.4.0",
     "typescript": "7.0.2"
   }
 }
