@@ -141,8 +141,8 @@ api.post<{
     release: { releaseTitle: string }
   }
 }>('/', async ({ body, log }) => {
-  log.info(body.release.releaseTitle)
   if (config.events.includes(body.eventType)) {
+    log.info(body.release.releaseTitle)
     if (body.movie) {
       done.push({
         folder: body.movie.folderPath.replace(config.fileDir, ''),
